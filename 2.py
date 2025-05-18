@@ -12,50 +12,10 @@ from io import BytesIO
 os.chdir(os.path.dirname(__file__))
 API_KEY_STATIC = 'dbcb1a72-711c-454c-8aad-1732cd8bda67'
 
-
-# class MainWindow(QMainWindow):
-#     g_map: QLabel
-
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         uic.loadUi('main_window_1.ui', self)
-
-#         self.map_zoom = 10
-#         self.map_ll = [37.977751, 55.757718]
-#         self.map_key = ''
-
-#         self.refresh_map()
-
-#     def keyPressEvent(self, event):
-#         if event.key() == Qt.Key.Key_PageUp and self.map_zoom < 17:
-#             self.map_zoom += 1
-#         if event.key() == Qt.Key.Key_PageDown and self.map_zoom > 0:
-#             self.map_zoom -= 1
-#         self.refresh_map()
-
-#     def refresh_map(self):
-#         map_params = {
-#             "ll": ','.join(map(str, self.map_ll)),
-#             'z': self.map_zoom,
-#             'apikey': API_KEY_STATIC,
-#         }
-
-#         response = requests.get('https://static-maps.yandex.ru/v1',
-#                                 params=map_params)
-#         img = QImage.fromData(response.content)
-#         pixmap = QPixmap.fromImage(img)
-#         self.g_map.setPixmap(pixmap)
-
-
-# app = QApplication(sys.argv)
-# main_window = MainWindow()
-# main_window.show()
-# sys.exit(app.exec())
-
-
 server_address = 'https://static-maps.yandex.ru/v1?'
 ll_spn = 'll=37.530887,55.703118&spn=0.002,0.002'
-# Готовим запрос.
+
+
 def get_map(ll, map_zoom):
     screen.fill("black")
     map_params = {
@@ -68,6 +28,8 @@ def get_map(ll, map_zoom):
                             params=map_params)
     map_file = BytesIO(response.content)
     screen.blit(pygame.image.load(map_file), (0, 0))
+
+
 pygame.init()
 screen = pygame.display.set_mode((600, 450))
 ll = [45.711434, 43.326383]
